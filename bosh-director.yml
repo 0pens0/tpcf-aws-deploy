@@ -1,0 +1,49 @@
+az-configuration:
+  - name: eu-west-2a
+
+network-assignment:
+  network:
+    name: singleton
+  singleton_availability_zone:
+    name: eu-west-2a
+
+networks-configuration:
+  networks:
+    - name: singleton
+      service_network: true
+      subnets:
+        - iaas_identifier: subnet-0a5f09774942f10d7
+          cidr: 10.0.1.0/24
+          availability_zone_names: [eu-west-2a]
+          reserved_ip_ranges: 10.0.1.1-10.0.1.9
+          dns:
+            - "8.8.8.8"
+          gateway: 10.0.1.1
+
+properties-configuration:
+  director_configuration:
+    enable_vm_resurrector: true
+    resurrector_enabled: true
+    max_threads: 5
+    bosh_recreate_on_next_deploy: false
+    post_deploy_enabled: true
+
+  iaas_configuration:
+    access_key_id: YOUR_KEY
+    secret_access_key: YOUR_SECRET
+    key_pair_name: tpcf-key
+    region: eu-west-2
+    security_group: sg-0d9b9a53156745acf
+    vpc_id: vpc-083bed57db1b9712b
+    subnet_id: subnet-0a5f09774942f10d7
+    availability_zone: eu-west-2a
+    bosh_instance_profile: tanzu-bosh-profile
+
+  security_configuration:
+    generate_vm_passwords: true
+
+  syslog_configuration:
+    enabled: false
+
+resource-configuration: {}
+vmextensions-configuration: []
